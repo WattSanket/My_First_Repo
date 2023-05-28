@@ -1,0 +1,74 @@
+Nqueen problem :
+def isSafe(arr, x, y, n):
+    for row in range(x):
+        if arr[row][y] == 1:
+            return False
+    row = x
+    col = y
+    while row >= 0 and col >= 0:
+        if arr[row][col] == 1:
+            return False
+        row -= 1
+        col -= 1
+    row = x
+    col = y
+    while row >= 0 and col < n:
+        if arr[row][col] == 1:
+            return False
+        row -= 1
+        col += 1
+    return True
+
+def nQueen(arr, x, n):
+    if x >= n:
+        return True
+    for col in range(n):
+        if isSafe(arr, x, col, n):
+            arr[x][col] = 1
+            if nQueen(arr, x + 1, n):
+                return True
+            arr[x][col] = 0
+    return False
+
+n = int(input("Enter number of queen : "))
+arr = [[0 for j in range(n)] for i in range(n)]
+if nQueen(arr, 0, n):
+    for i in range(n):
+        for j in range(n):
+            print(arr[i][j], end=" ")
+        print()
+Output:
+Enter number of queen : 8
+1 0 0 0 0 0 0 0
+0 0 0 0 1 0 0 0
+0 0 0 0 0 0 0 1
+0 0 0 0 0 1 0 0
+0 0 1 0 0 0 0 0
+0 0 0 0 0 0 1 0
+0 1 0 0 0 0 0 0
+0 0 0 1 0 0 0 0
+Enter number of queen : 4
+0 1 0 0
+0 0 0 1
+1 0 0 0
+0 0 1 0
+
+NQUEEN:
+No two queen should be in same row,
+column or diagonal
+How to check diagonal
+
+If queen is in (2,3) (row, col) then 2+3
+= 5 check top right to bottom left
+diagonals sum not be equal to 5
+If queen is in (2,3) (row, col) then 2-3 =
+-1 check top left to bottom right
+diagonals difference not be equal to -1
+Step 1: place the queen in 1st row
+Step 2: check the possible places for
+next rows and place the queens
+Step 3: if cannot place the queen in
+any place then backtrack to the above
+row and try another possibility if there
+else backtrack
+Step 4 : find the solution

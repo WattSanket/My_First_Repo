@@ -1,0 +1,104 @@
+Implement Greedy search algorithm for Kruskal’s Minimal Spanning Tree Algorithm
+class DSU:
+    def _init_(self, n):
+        self.parent = [-1]*n
+        self.rank = [1]*n
+
+    def find(self, i):
+        if self.parent[i] == -1:
+            return i
+        self.parent[i] = self.find(self.parent[i])
+        return self.parent[i]
+
+    def unite(self, x, y):
+        s1 = self.find(x)
+        s2 = self.find(y)
+        if s1 != s2:
+            if self.rank[s1] < self.rank[s2]:
+                self.parent[s1] = s2
+            elif self.rank[s1] > self.rank[s2]:
+                self.parent[s2] = s1
+            else:
+                self.parent[s2] = s1
+                self.rank[s1] += 1
+
+class Graph:
+    def _init_(self, V):
+        self.edgelist = []
+        self.V = V
+
+    def addEdge(self, x, y, w):
+        self.edgelist.append([w, x, y])
+
+    def kruskals_mst(self):
+        self.edgelist.sort()
+        s = DSU(self.V)
+        ans = 0
+        print("Following are the edges in the constructed MST")
+        for edge in self.edgelist:
+            w, x, y = edge
+            if s.find(x) != s.find(y):
+                s.unite(x, y)
+                ans += w
+                print(x, "--", y, "==", w)
+        print("Minimum Cost Spanning Tree:", ans)
+
+g = Graph(4)
+g.addEdge(0, 1, 10)
+g.addEdge(1, 3, 15)
+g.addEdge(2, 3, 4)
+g.addEdge(2, 0, 6)
+g.addEdge(0, 3, 5)
+g.kruskals_mst()
+
+Output:
+/tmp/ZYruWDIe11.o
+Following are the edges in the constructed MST
+2 -- 3 == 4
+0 -- 3 == 5
+0 -- 1 == 10
+Minimum Cost Spanning Tree: 19
+
+Graph representation G(V,E). —&gt; v
+(nodes ) e(edges)
+Minimum spanning tree —&gt;. G’ (V’,E’)
+Contains same no of vertices : ie. Nodes
+—&gt; V’=V
+And edges should be —&gt; E’ = (V-1)
+MST (minimum spanning tree) should not
+form loop
+A graph can have more than one spanning
+tree but only one minimum spanning tree
+that should follow abc condition
+
+&gt;Kruskals algorithm (Single source
+shortest path )
+Step 1 : remove loops and parallel
+edges
+
+(loops is the edge from node to
+
+same node )
+
+(parallel edge is two edge from
+
+one node to same other node)
+
+—&gt; remove parallel edge with
+
+maximum cost
+
+—&gt; keep the minimum cost
+
+edge
+Step 2: arrange all the edge in
+increasing order of their edge weight
+Step : we start from the minimum
+weight edge and not source
+Step 3 : choose the edge with
+minimum edge weight and connect
+the edges till no edge forms the cycle /
+loop
+Step 4 : if the edge forms the cycle
+then eliminate that edge do not
+consider it

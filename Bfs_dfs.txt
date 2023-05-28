@@ -1,0 +1,138 @@
+BFS: Code🡪
+
+from queue import Queue
+
+class Graph:
+    def _init_(self, v):
+        self.no_of_nodes = v
+        self.no_of_edges = 0
+        self.visited_nodes = [False] * 50
+        self.adj_matrix = [[0] * 50 for i in range(50)]
+    
+    def insert_edges(self):
+        x, y = 0, 0
+        print("Enter number of edges = ", end="")
+        self.no_of_edges = int(input())
+        for i in range(self.no_of_edges):
+            print("Enter edge : ", end="")
+            x, y = map(int, input().split())
+            self.adj_matrix[x][y] = self.adj_matrix[y][x] = 1
+    
+    def BFS(self, starting_node):
+        q = Queue()
+        self.visited_nodes[starting_node] = True
+        q.put(starting_node)
+        
+        while not q.empty():
+            temp = q.get()
+            print(temp, end=" ")
+            for i in range(self.no_of_nodes):
+                if self.adj_matrix[temp][i] == 1 and not self.visited_nodes[i]:
+                    self.visited_nodes[i] = True
+                    q.put(i)
+
+ver = int(input("Enter number of nodes = "))
+g = Graph(ver)
+g.insert_edges()
+s = int(input("Enter starting node : "))
+g.BFS(s)
+
+
+
+Output:
+Enter number of nodes = 9
+Enter number of edges = 8
+Enter edge : 0 1
+Enter edge : 0 2
+Enter edge : 0 3
+Enter edge : 1 4
+Enter edge : 2 5
+Enter edge : 2 6
+Enter edge : 6 7
+Enter edge : 7 8
+Enter starting node : 0
+0 1 2 3 4 5 6 7 8
+
+
+
+DFS Code:
+
+class Graph:
+    def _init_(self, v):
+        self.no_of_nodes = v
+        self.no_of_edges = 0
+        self.visited_nodes = [False] * 50
+        self.adj_matrix = [[0] * 50 for i in range(50)]
+        for i in range(self.no_of_nodes):
+            self.visited_nodes[i] = False
+            for j in range(self.no_of_nodes):
+                self.adj_matrix[i][j] = 0
+
+    def insert_edges(self):
+        x, y = 0, 0
+        print("Enter number of edges = ", end="")
+        self.no_of_edges = int(input())
+        for i in range(self.no_of_edges):
+            print("Enter edge : ", end="")
+            x, y = map(int, input().split())
+            self.adj_matrix[x][y] = self.adj_matrix[y][x] = 1
+
+    def are_all_visited(self):
+        for i in range(self.no_of_nodes):
+            if not self.visited_nodes[i]:
+                return False
+        return True
+
+    def DFS(self, starting_node):
+        s = []
+        s.append(starting_node)
+        while s and not self.are_all_visited():
+            temp = s[-1]
+            print(temp, end=" ")
+            self.visited_nodes[temp] = True
+            s.pop()
+            for i in range(self.no_of_nodes):
+                if self.adj_matrix[temp][i] == 1 and not self.visited_nodes[i]:
+                    s.append(i)
+
+
+ver, s = 0, 0
+print("Enter number of nodes = ", end="")
+ver = int(input())
+g = Graph(ver)
+g.insert_edges()
+print("Enter starting node : ", end="")
+s = int(input())
+g.DFS(s)
+
+
+Output:
+
+Enter number of nodes = 9
+Enter number of edges = 8
+Enter edge : 0 1
+Enter edge : 0 2
+Enter edge : 0 3
+Enter edge : 1 4
+Enter edge : 2 5
+Enter edge : 2 6
+Enter edge : 6 7 
+Enter edge : 7 8
+Enter starting node : 0
+0 3 2 6 7 8 5 1 4
+
+
+BFS  : Queue DataStructure is used (fifo)
+Step 1: insert root node in queue
+Step 2: then remove root node and write in (result {})
+Step 3: insert nodes in queue which are adj unvisited nodes to the node which is removed 
+Step 4: go to step 2
+
+
+DFS :Stack Data Structure is used (lifo) 
+Step 1: push root node in Stack and write it in the result 
+Step 2: push any one adj unvisited node of the node present at the top of stack and write it in the result  till no node is there 
+Step 3: then pop out the top node if don’t have any adj non visited node till we get the node which have unvisited node
+Step 4: got to step 2
+Till stack is empty 
+Empty stack represents that all nodes are visited

@@ -1,0 +1,51 @@
+Selection sort
+def selection_sort(arr):
+    n = len(arr)
+
+    for i in range(n):
+        min_idx = i
+        for j in range(i + 1, n):
+            if arr[j] < arr[min_idx]:
+                min_idx = j
+
+        arr[i], arr[min_idx] = arr[min_idx], arr[i]
+
+    return arr
+
+
+# Example usage with user input
+if _name_ == "_main_":
+    # Take input from the user to create the array
+    num_elements = int(input("Enter the number of elements: "))
+    array = []
+
+    for _ in range(num_elements):
+        element = int(input("Enter an element: "))
+        array.append(element)
+
+    # Test the selection sort algorithm
+    sorted_array = selection_sort(array)
+    print("Sorted array:", sorted_array)
+Output:
+Enter the number of elements: 6
+Enter elements:
+4
+67
+4
+
+33
+2
+5
+Array before Sorting: 4 67 4 33 2 5
+Array after Sorting: 2 4 4 5 33 67
+
+Selection Sort :
+Pass1 :nitially 0th index in considered as a
+minimum and then it is compared with the
+other element and swapped with minimum
+element
+Pass2 :Then index 1 is considered as
+minimum and then checked with other and
+swapped with minimum
+Sooo onnnn till sorted
+We need n-1 passes to sort the array

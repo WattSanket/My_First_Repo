@@ -1,0 +1,83 @@
+Implement Greedy search algorithm for Prim’s Minimal Spanning Tree Algorithm
+import sys
+V = 5
+def minKey(key, mstSet):
+    min = sys.maxsize
+    for v in range(V):
+        if mstSet[v] == False and key[v] < min:
+            min = key[v]
+            min_index = v
+    return min_index
+def printMST(parent, graph):
+    print("Edge \tWeight")
+    for i in range(1, V):
+        print(parent[i], "-", i, "\t", graph[i][parent[i]])
+def primMST(graph):
+    parent = [None] * V
+    key = [None] * V
+    mstSet = [None] * V
+    for i in range(V):
+        key[i] = sys.maxsize
+        mstSet[i] = False
+    key[0] = 0
+    parent[0] = -1
+    for count in range(V - 1):
+        u = minKey(key, mstSet)
+        mstSet[u] = True
+        for v in range(V):
+            if graph[u][v] and mstSet[v] == False and graph[u][v] < key[v]:
+                parent[v] = u
+                key[v] = graph[u][v]
+    printMST(parent, graph)
+graph = [ [ 0, 2, 0, 6, 0 ],
+          [ 2, 0, 3, 8, 5 ],
+          [ 0, 3, 0, 0, 7 ],
+          [ 6, 8, 0, 0, 9 ],
+          [ 0, 5, 7, 9, 0 ] ]
+primMST(graph)
+Output:
+Edge Weight
+0 - 1 2
+1 - 2 3
+0 - 3 6
+1 - 4 5
+
+Graph representation G(V,E). —&gt; v
+(nodes ) e(edges)
+Minimum spanning tree —&gt;. G’ (V’,E’)
+Contains same no of vertices : ie. Nodes
+—&gt; V’=V
+And edges should be —&gt; E’ = (V-1)
+MST (minimum spanning tree) should not
+form loop
+A graph can have more than one spanning
+tree but only one minimum spanning tree
+that should follow abc condition
+
+&gt;Prims algorithm (Single source
+shortest path )
+
+Step 1 : remove loops and parallel
+edges
+
+(loops is the edge from node to
+
+same node )
+
+(parallel edge is two edge from
+
+one node to same other node)
+
+—&gt; remove parallel edge with
+
+maximum cost
+
+—&gt; keep the minimum cost
+
+edge
+Step 2: chose the source node
+Step 3 : chose the outgoing edge from
+source node which has minimum cost .
+Step 4: then choose the outgoing edge
+which has minimum cost from all the
+nodes previously selected.

@@ -1,0 +1,136 @@
+Chatbot code python
+def greet():
+print(&quot;Hi! Welcome to the flight booking application. How can I help you today?&quot;)
+
+def book_flight():
+print(
+&quot;Sure, let&#39;s book a flight for you. Can you please tell me your departure and destination
+cities?:&quot;
+)
+departure = input(&quot;Departure city: &quot;)
+destination = input(&quot;Destination city: &quot;)
+print(&quot;Great! Now, can you tell me your travel dates?&quot;)
+departure_date = input(&quot;Departure date (YYYY-MM-DD): &quot;)
+return_date = input(&quot;Return date (YYYY-MM-DD): &quot;)
+print(
+&quot;Thank you! Your flight has been booked from {0} to {1} departing on {2} and returning
+on {3}.&quot;.format(
+departure, destination, departure_date, return_date
+)
+)
+
+def check_flight_availability():
+print(
+&quot;Sure, let me check the availability of flights for you. Can you please tell me your
+departure and destination cities? :&quot;
+)
+departure = input(&quot;Departure city: &quot;)
+destination = input(&quot;Destination city: &quot;)
+print(&quot;Great! Now, can you tell me your travel dates?&quot;)
+departure_date = input(&quot;Departure date (YYYY-MM-DD): &quot;)
+print(
+&quot;Flights are available from {0} to {1} on {2}&quot;.format(
+departure, destination, departure_date
+)
+)
+
+def get_flight_price():
+print(
+&quot;Sure, let me check the price of the flight for you. Can you please tell me your travel
+dates?&quot;
+)
+departure_date = input(&quot;Departure date (YYYY-MM-DD): &quot;)
+return_date = input(&quot;Return date (YYYY-MM-DD): &quot;)
+
+print(&quot;The price for your travel dates is $500.&quot;)
+
+def book_hotel():
+print(
+&quot;Sure, let&#39;s book a hotel for you. Can you please tell me your destination city?&quot;
+)
+destination = input(&quot;Destination city: &quot;)
+print(&quot;Great! Now, can you tell me your travel dates?&quot;)
+checkin_date = input(&quot;Check-in date (YYYY-MM-DD): &quot;)
+checkout_date = input(&quot;Check-out date (YYYY-MM-DD): &quot;)
+print(
+&quot;Thank you! Your hotel has been booked in {0} from {1} to {2}.&quot;.format(
+destination, checkin_date, checkout_date
+)
+)
+
+def cancel_booking():
+print(
+&quot;Sorry to hear that you want to cancel your booking. Please provide me with your
+booking reference number.&quot;
+)
+booking_ref = input(&quot;Booking reference number: &quot;)
+print(
+&quot;Your booking with reference number {0} has been cancelled.&quot;.format(booking_ref)
+)
+
+def end():
+print(&quot;Thank you for using the flight booking application. Have a great day!&quot;)
+
+greet()
+while True:
+response = input(
+&quot;\nWhat would you like to do? (book a flight, check flight availability, get flight price,
+book hotel, cancel booking, exit): \n&quot;
+)
+if &quot;cancel&quot; in response:
+cancel_booking()
+elif &quot;hotel&quot; in response:
+book_hotel()
+elif &quot;book&quot; in response:
+book_flight()
+elif &quot;check&quot; in response:
+
+check_flight_availability()
+elif &quot;price&quot; in response:
+get_flight_price()
+elif &quot;exit&quot; in response:
+end()
+break
+else:
+print(&quot;I&#39;m sorry, I didn&#39;t understand that. Please try again.&quot;)
+
+output
+Hi! Welcome to the flight booking application. How can I help you today?
+What would you like to do? (book a flight, check flight availability, get flight price, book
+hotel, cancel booking, exit):
+i want to book flight
+Sure, let&#39;s book a flight for you. Can you please tell me your departure anddestination
+cities?:
+Departure city: Pune
+Destination city: Mumbai
+Great! Now, can you tell me your travel dates?
+Departure date (YYYY-MM-DD): 2023-03-14
+Return date (YYYY-MM-DD): 2023-05-14
+Thank you! Your flight has been booked from Pune to Mumbai departing on 2023-03-14 and
+returning on 2023-05-14.
+What would you like to do? (book a flight, check flight availability, get flight price, book
+hotel, cancel booking, exit):
+so sorry, i Want to cancel it
+Sorry to hear that you want to cancel your booking. Please provide me with your booking
+reference number.
+Booking reference number: 100
+Your booking with reference number 100 has been cancelled.
+What would you like to do? (book a flight, check flight availability, get flight price, book
+hotel, cancel booking, exit):
+i wnat to book hotel
+Sure, let&#39;s book a hotel for you. Can you please tell me your destination city?
+Destination city: Pune
+Great! Now, can you tell me your travel dates?
+Check-in date (YYYY-MM-DD): 2023-05-14
+Check-out date (YYYY-MM-DD): 2023-05-30
+Thank you! Your hotel has been booked in Pune from 2023-05-14 to 2023-05-30.
+What would you like to do? (book a flight, check flight availability, get flight price, book
+hotel, cancel booking, exit):
+thanks
+I&#39;m sorry, I didn&#39;t understand that. Please try again.
+
+What would you like to do? (book a flight, check flight availability, get flight price, book
+hotel, cancel booking, exit):
+thanks, exit
+Thank you for using the flight booking application. Have a great day!
+&gt;

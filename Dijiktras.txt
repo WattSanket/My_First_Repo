@@ -1,0 +1,81 @@
+Implement Greedy search algorithm for Dijkstra’s Minimal Spanning Tree Algorithm
+Code:
+import sys
+V = 9
+def minDistance(dist, sptSet):
+    min = sys.maxsize
+    for v in range(V):
+        if sptSet[v] == False and dist[v] <= min:
+            min = dist[v]
+            min_index = v
+    return min_index
+def printSolution(dist):
+    print("Vertex \t Distance from Source")
+    for i in range(V):
+        print(i, "\t\t\t\t", dist[i])
+def dijkstra(graph, src):
+    dist = [sys.maxsize] * V
+    sptSet = [False] * V
+    dist[src] = 0
+    for count in range(V - 1):
+        u = minDistance(dist, sptSet)
+        sptSet[u] = True
+        for v in range(V):
+            if (not sptSet[v] and graph[u][v] and dist[u] != sys.maxsize and dist[u] + graph[u][v] < dist[v]):
+                dist[v] = dist[u] + graph[u][v]
+    printSolution(dist)
+graph = [[0, 4, 0, 0, 0, 0, 0, 8, 0],
+         [4, 0, 8, 0, 0, 0, 0, 11, 0],
+         [0, 8, 0, 7, 0, 4, 0, 0, 2],
+         [0, 0, 7, 0, 9, 14, 0, 0, 0],
+         [0, 0, 0, 9, 0, 10, 0, 0, 0],
+         [0, 0, 4, 14, 10, 0, 2, 0, 0],
+         [0, 0, 0, 0, 0, 2, 0, 1, 6],
+         [8, 11, 0, 0, 0, 0, 1, 0, 7],
+         [0, 0, 2, 0, 0, 0, 6, 7, 0]]
+dijkstra(graph, 0)
+
+Output:
+Vertex Distance from Source
+0 0
+1 4
+2 12
+3 19
+4 21
+5 11
+6 9
+7 8
+8 14
+
+Graph representation G(V,E). —&gt; v
+(nodes ) e(edges)
+Minimum spanning tree —&gt;. G’ (V’,E’)
+Contains same no of vertices : ie. Nodes
+—&gt; V’=V
+And edges should be —&gt; E’ = (V-1)
+MST (minimum spanning tree) should not
+form loop
+A graph can have more than one spanning
+tree but only one minimum spanning tree
+that should follow abc condition
+
+&gt;Dijikstras algorithm. (Single
+source shortest path )
+
+Provide optimal solution
+Works on both types of graph directed
+and undirected
+Innitially we consider the cost to be
+infinite and then we relax the cost by
+formula
+If {d(u) + c(u,v) &lt; d(v)}
+Then d(v) = d(u) + c(u,v)
+If the node is already selected then we
+will not update the distance of that
+node again we will update the distance
+Of other nodes from the selected node
+And we select the node which has less
+distance from all other which are not
+selected
+We can update the distance of those
+node which are directly connected
